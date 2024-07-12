@@ -1,0 +1,22 @@
+server:
+  port: 8080
+  address: 127.0.0.1
+spring:
+  application:
+    name: sleuth-example
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    env:
+      show-values: always
+
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            DispatcherServlet=DEBUG:
