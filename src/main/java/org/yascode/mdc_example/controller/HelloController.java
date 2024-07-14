@@ -1,5 +1,6 @@
 package org.yascode.mdc_example.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
@@ -51,7 +52,7 @@ public class HelloController {
     }
 
     @GetMapping("/authenticate")
-    public Object authenticate() {
+    public Object authenticate(HttpServletRequest request) {
         String url = "http://localhost:6689/api/v1/admin/resource";
         String token = "eyJhbGciOiJIUzI1NiJ9.eyJhdXRob3JpdGllcyI6WyJSRUFEX1BSSVZJTEVHRSIsIlVQREFURV9QUklWSUxFR0UiLCJXUklURV9QUklWSUxFR0UiLCJST0xFX01BR0lDIiwiREVMRVRFX1BSSVZJTEVHRSJdLCJyb2xlcyI6WyJNQUdJQyJdLCJzdWIiOiJSRnZIckVoZSIsImlhdCI6MTcyMDk1NjAyOSwiZXhwIjoxNzIwOTU2MjY5LCJuYmYiOjE3MjA5NTYwMzB9.EyGQH8KOHfb6pF68oW09LMqAlWs5PuMxkVdcC1grsi0";
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>(Map.of("Authorization",  List.of("Bearer " + token)));
@@ -64,6 +65,7 @@ public class HelloController {
             }
         } catch (RestClientException e) {
             log.error(e.getMessage());
+            return "Api down\n";
         }
         return null;
     }
